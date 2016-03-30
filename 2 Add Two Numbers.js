@@ -1,4 +1,5 @@
 /**
+ * Author: Bilong HUANG
  * Definition for singly-linked list.
  * function ListNode(val) {
  *     this.val = val;
@@ -11,51 +12,27 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    if(l1 === null || l2 === null){
-        return l1 || l2;
+   var result, node, node_current, add = 0;
+    
+    while ( l1 || l2 ) {
+        node_current = new ListNode((l1 ? l1.val : 0) + (l2 ? l2.val : 0) + add);
+        if ( add = Math.floor(node_current.val / 10))
+            node_current.val = node_current.val % 10;
+        if (result == null) {
+            result = node_current;
+        } else {
+            node.next = node_current;
+        }
+        node = node_current;
+        if (l1)
+            l1 = (l1.next ? (l1 = l1.next) : null);
+        if (l2)
+            l2 = (l2.next ? (l2 = l2.next) : null);
     }
     
-    var result = new ListNode(0);
-    var cur = result;
-    var p = l1;
-    var q = l2;
-    var carry = 0;
-    
-    while(p || q){
-        var qval;
-        var pval;
-        
-        if(q){
-            qval = q.val;
-            q = q.next;
-        } else {
-            qval = 0;
-        }
-        
-        if(p){
-            pval = p.val;
-            p = p.next;
-        } else {
-            pval = 0;
-        }
-        
-        var val = qval + pval + carry;
-        
-        if(val > 9){
-            carry = 1;
-            val %= 10;
-        } else {
-            carry = 0;
-        }
-        
-        cur.next = new ListNode(val);
-        cur = cur.next;
+    if (add != 0) {
+        node_current = new ListNode(add);
+        node.next = node_current;
     }
-    
-    if(carry !== 0){
-        cur.next = new ListNode(1);
-    }
-    
-    return result.next;
-    
+    return result;
 };
