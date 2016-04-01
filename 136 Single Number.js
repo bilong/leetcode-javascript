@@ -1,18 +1,14 @@
 // Leetcode 136
 // Language: Javascript
 // Problem: https://leetcode.com/problems/single-number/
-// Author: Chihung Yu
+// Author: Bilong HUANG
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var singleNumber = function(nums) {
-    var total = 0;
-    
-    for(var i = 0; i < nums.length; i++){
-        var num = nums[i];
-        total ^= num;
+    for (i=1; i<nums.length; i++) {
+        nums[0] ^= nums[i];
     }
-    
-    return total;
+    return nums[0];
 };
